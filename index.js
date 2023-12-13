@@ -32,6 +32,15 @@ app.post("/register", async (req, resp) => {
     resp.status(500).send("Error saving user");
   }
 });
+app.get("/hello", async (req, resp) => {
+  try {
+   
+    resp.send("hello ")
+  } catch (error) {
+    console.error("Error saving user:", error);
+    resp.status(500).send("Error saving user");
+  }
+});
 app.post("/login", async (req, resp) => {
   try {
     const user = await users.findOne({ email: req.body.email, password: req.body.password }).select("-password");

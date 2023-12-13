@@ -8,6 +8,31 @@ const {
 
 
  const router = express.Router()
+ router.route("register", async (req, resp) => {
+  try {
+    let user = new users(req.body);
+    let result = await user.save();
+    result=result.toObject();
+    delete result.password;
+    resp.send(result)
+  } catch (error) {
+    console.error("Error saving user:", error);
+    resp.status(500).send("Error saving user");
+  }
+});
+router.route("login", async (req, resp) => {
+  try {
+    const user = await users.findOne({ email: req.body.email, password: req.body.password }).select("-password");
+    if (user) {
+      resp.send(user);
+    } else {
+      resp.send({ result: 'no user found' });
+    }
+  } catch (error) {
+    console.error("Error finding user:", error);
+    resp.status(500).send({ result: 'error finding user' });
+  }
+});
 
  
  router.route('products',getProductForReview )

@@ -1,11 +1,12 @@
 const express = require("express");
+
 const {
   getProductForReview,
   getProductById,
   createProductReview,
   getUserReviews
 } = require( '../controllers/productController.js');
-
+const users = require("../models/Users.js");
 
  const router = express.Router()
  router.route("register", async (req, resp) => {

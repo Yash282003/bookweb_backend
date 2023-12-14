@@ -21,6 +21,10 @@ const DB =process.env.MONGODB_URI
 mongoose
   .connect(DB, {
     useNewUrlParser: true,
+    useUnifiedTopology: true,
+    writeConcern: {
+      w: 'majority', // Correct syntax for majority
+    },
   })
   .then(() => {
     console.log("hogayaa");

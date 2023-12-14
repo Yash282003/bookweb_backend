@@ -2,7 +2,7 @@ const productRoutes = require("./routes/productRoutes.js");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const express = require("express");
-
+require("dotenv").config();
 const users = require("./models/Users");
 const {
   getProductForReview,
@@ -16,8 +16,8 @@ app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use("/", productRoutes);
-const DB =
-  "mongodb+srv://mailyashika28:yashmongo@cluster0.hv29e74.mongodb.net/?retryWrites=true&w=majority";
+console.log();
+const DB =process.env.MONGODB_URI
 mongoose
   .connect(DB, {
     useNewUrlParser: true,
